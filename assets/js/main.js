@@ -40,6 +40,9 @@
 
   // Contact form: posts to the form's action if one is set, otherwise opens the visitor's mail client.
   var form = document.getElementById('contact-form');
+  if (form && /[?&]sent=1/.test(location.search)) {
+    form.querySelector('.form-msg').textContent = 'Thanks! Your message has been sent. We\'ll be in touch shortly.';
+  }
   if (form) {
     form.addEventListener('submit', function (e) {
       var msg = form.querySelector('.form-msg');
@@ -48,7 +51,7 @@
       var d = new FormData(form);
       var body = 'Name: ' + d.get('first') + ' ' + d.get('last') + '\nEmail: ' + d.get('email') +
         '\nWebsite: ' + (d.get('website') || '-') + '\n\n' + d.get('message');
-      window.location.href = 'mailto:info@seowebsites.co.nz?subject=' +
+      window.location.href = 'mailto:seowebsitesnz@gmail.com?subject=' +
         encodeURIComponent('Website enquiry from ' + d.get('first')) + '&body=' + encodeURIComponent(body);
       msg.textContent = 'Opening your email app to send the message…';
     });

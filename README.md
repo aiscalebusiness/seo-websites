@@ -31,5 +31,5 @@ Then open http://localhost:4410.
 ## Before going live
 
 - Hero dashboard figures on the homepage (+286%, 12.4K, $48K) are illustrative — replace with real case-study numbers or remove.
-- The contact form falls back to opening the visitor's email app. Set an `action` on `#contact-form` (Formspree, Netlify Forms, etc.) to post directly.
+- The contact form posts to [FormSubmit](https://formsubmit.co), which forwards submissions to seowebsitesnz@gmail.com. The first submission triggers a one-time activation email to that inbox. Click the link in it, or later submissions won't be delivered. The destination is set by `EMAIL` / `FORM_ACTION` in `build.py`.
 - `/testimonials/`, `/seo-audit/`, `/blog/` and `/seo-pricing-nz/` are linked but not part of this rebuild.

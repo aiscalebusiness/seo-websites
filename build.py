@@ -7,7 +7,8 @@ ROOT = Path(__file__).parent
 OUT = ROOT / "site"
 DOMAIN = "https://seowebsites.co.nz"
 PHONE, PHONE_TEL = "020 4059 1357", "+64204059 1357".replace(" ", "")
-EMAIL = "info@seowebsites.co.nz"
+EMAIL = "seowebsitesnz@gmail.com"
+FORM_ACTION = f"https://formsubmit.co/{EMAIL}"  # FormSubmit forwards submissions to EMAIL
 
 # ---------------------------------------------------------------- icons
 def ico(name, cls=""):
@@ -510,7 +511,11 @@ def contact():
     <div class="contact-item reveal"><span class="ring-ico">{ico("pin")}</span><span><small>Location</small><b>Auckland, New Zealand</b></span></div>
     <div class="panel reveal"><h3>What happens next?</h3><ul class="check"><li>We review your website and goals</li><li>A strategy call to talk through your options</li><li>A clear plan, with no long-term contracts</li></ul></div>
   </div>
-  <form class="panel reveal" id="contact-form" method="post">
+  <form class="panel reveal" id="contact-form" method="post" action="{FORM_ACTION}">
+    <input type="hidden" name="_subject" value="New enquiry from seowebsites.co.nz">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="{DOMAIN}/contact/?sent=1#contact-form">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
     <h2 style="font-size:1.6rem">Send Us a Message</h2>
     <div class="f-row"><label><span>First name <span class="req">*</span></span><input name="first" autocomplete="given-name" required></label>
       <label><span>Last name</span><input name="last" autocomplete="family-name"></label></div>
@@ -523,7 +528,7 @@ def contact():
 </div></section>
 {cta()}'''
     return dict(slug="contact/", title="Contact - SEO Websites",
-                desc="Contact SEO Websites, a boutique Auckland SEO and AI digital marketing agency. Call 020 4059 1357 or email info@seowebsites.co.nz.",
+                desc="Contact SEO Websites, a boutique Auckland SEO and AI digital marketing agency. Call 020 4059 1357 or email seowebsitesnz@gmail.com.",
                 body=body, crumb="Contact")
 
 # ---------------------------------------------------------------- render
