@@ -9,6 +9,7 @@ DOMAIN = "https://seowebsites.co.nz"
 PHONE, PHONE_TEL = "020 4059 1357", "+64204059 1357".replace(" ", "")
 EMAIL = "seowebsitesnz@gmail.com"
 FORM_ACTION = f"https://formsubmit.co/{EMAIL}"  # FormSubmit forwards submissions to EMAIL
+GA4_ID = "G-BL8N5TNG98"
 
 # ---------------------------------------------------------------- icons
 def ico(name, cls=""):
@@ -571,6 +572,8 @@ def render(p):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA4_ID}');</script>
 {ld}
 </head>
 <body>

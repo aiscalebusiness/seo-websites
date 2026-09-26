@@ -38,6 +38,20 @@
     els.forEach(function (el) { el.classList.add('in'); });
   }
 
+  // GA4 events. beacon transport so hits survive the page navigating away.
+  function track(name, params) {
+    if (typeof window.gtag !== 'function') return;
+    params = params || {};
+    params.transport_type = 'beacon';
+    window.gtag('event', name, params);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href^="mailto:"]');
+    if (!a) return;
+    var isTel = a.getAttribute('href').indexOf('tel:') === 0;
+    track(isTel ? 'phone_click' : 'email_click', { link_location: location.pathname });
+  });
+
   // Contact form: posts to the form's action if one is set, otherwise opens the visitor's mail client.
   var form = document.getElementById('contact-form');
   if (form && /[?&]sent=1/.test(location.search)) {
@@ -46,6 +60,7 @@
   if (form) {
     form.addEventListener('submit', function (e) {
       var msg = form.querySelector('.form-msg');
+      track('generate_lead', { form_id: 'contact-form' });
       if (form.getAttribute('action')) return;
       e.preventDefault();
       var d = new FormData(form);
