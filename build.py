@@ -164,17 +164,30 @@ def why_grid(items=WHY):
     return '<div class="grid g-6 why-grid">' + "".join(
         f'<div class="why reveal"><div class="ring-ico">{ico(i)}</div><h3>{t}</h3><p>{d}</p></div>' for i, t, d in items) + "</div>"
 
-CLIENTS = [("pacific-fuel.png", "Pacific Fuel Solutions"), ("marina-specialists.png", "Marina Specialists"),
-           ("frontier-pools.png", "Frontier Pools"), ("extreme-global.png", "Extreme Global"),
-           ("equal-exes.png", "Equal Exes"), ("joint-sup.png", "Joint Supplements NZ"),
-           ("katarzyna-mackenzie.png", "Katarzyna Mackenzie"), ("gf-flow.jpeg", "Guaranteed Flow Systems"),
-           ("one-day-video.png", "One Day Video"), ("auckland-plastic-surgical.png", "Auckland Plastic Surgical Centre"),
-           ("shafer-design.jpeg", "Shafer Design"), ("operation-restore-hope.png", "Operation Restore Hope"),
-           ("humphries-associates.png", "Humphries Associates")]
+# Client logos (white on transparent), in the same order as the aiscalebusiness.com slider.
+# Third field sizes square/tall marks so they read at the same visual weight as wide wordmarks.
+CLIENTS = [
+    ("coolaroo.webp", "Coolaroo", "xl"), ("msp.webp", "MSP Neuro Wellbeing", ""), ("nsk.webp", "The Northern School of Kinesiology", ""),
+    ("eci.webp", "ECI", ""), ("justjunk.webp", "Just Junk Removals", ""), ("equalexes.webp", "Equal Exes", ""),
+    ("property-super.webp", "Property With Superannuation", ""), ("a-plus-clinic.webp", "A Plus Cosmetic Clinic", "tall"),
+    ("baran-bordeaux.webp", "Baran de Bordeaux", "tall"), ("joints-up.webp", "Joint's Up", ""),
+    ("pacific-fuel.webp", "Pacific Fuel Solutions", ""), ("shafer-design.webp", "Shafer Design Limited", ""),
+    ("dr-m-janic.webp", "Dr M Janjic", ""), ("elisha-engineering.webp", "Elisha Engineering", ""),
+    ("extreme-global.webp", "Extreme Global", ""), ("gf-flow.webp", "Guaranteed Flow Systems", ""),
+    ("humphries.png", "Humphries Associates", "tall"), ("frontier-pools.webp", "Frontier Pools", ""),
+    ("katarzyna-mackenzie.webp", "Katarzyna Mackenzie Plastic Surgeon", ""), ("yeomans.webp", "Yeomans Survey Solutions", ""),
+    ("marina-specialists.webp", "Marina Specialists", ""), ("oral-care.webp", "The Oral Care Company", ""),
+    ("operation-restore-hope.webp", "Operation Restore Hope", ""), ("patara-life.webp", "Patara Life", "tall"),
+    ("tristan-de-chalain.webp", "Dr Tristan de Chalain", ""), ("mo-cullen.png", "Mo Cullen Shirtsmith", "tall"),
+]
 
-def logos(title="Trusted by Businesses Across New Zealand", sub="We work with ambitious businesses of all sizes, from local companies to growing national brands."):
-    imgs = "".join(f'<span><img src="/assets/img/clients/{f}" alt="{a}" loading="lazy"></span>' for f, a in CLIENTS)
-    return f'''<section class="sec-tight"><div class="wrap"><div class="sec-head reveal"><h2>{title}</h2><p>{sub}</p></div><div class="logos reveal">{imgs}</div></div></section>'''
+def logos(title="Trusted by Businesses Across New Zealand and Australia", sub="We work with ambitious businesses of all sizes, from local companies to growing national brands."):
+    def group(hidden):
+        items = "".join(f'<li class="logo-slide {c}"><img src="/assets/img/logos/{f}" alt="{"" if hidden else a + " logo"}" loading="lazy"></li>' for f, a, c in CLIENTS)
+        attr = ' aria-hidden="true"' if hidden else ""
+        return f'<ul class="logo-group"{attr}>{items}</ul>'
+    return f'''<section class="sec-tight"><div class="wrap"><div class="sec-head wide reveal"><h2>{title}</h2><p>{sub}</p></div></div>
+  <div class="logo-marquee reveal" aria-label="Client logos"><div class="logo-track">{group(False)}{group(True)}</div></div></section>'''
 
 TESTI_TEXT = "Clinton has completely transformed our online presence. Our website is now experiencing unprecedented levels of traffic resulting in a huge increase in the number of viable leads. We have no hesitation in recommending SEO Websites!"
 
